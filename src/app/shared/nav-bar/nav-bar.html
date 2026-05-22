@@ -1,0 +1,35 @@
+<nav class="flex items-center justify-between px-6 h-16 bg-gray-900 text-white">
+  
+  <!-- Logo -->
+  <span class="text-red-500 font-bold text-xl">MyYoutube</span>
+
+
+  @if (currentUser()) {
+    <div class="relative">
+      <button (click)="showMenu.set(!showMenu())"
+        class="flex items-center gap-2 hover:bg-gray-800 px-3 py-2 rounded-full transition">
+        <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-sm">👤</div>
+        <span class="text-sm font-medium">{{ currentUser()?.pseudo }}</span>
+      </button>
+
+      @if (showMenu()) {
+        <div class="fixed inset-0 z-40" (click)="showMenu.set(false)"></div>
+        <div class="absolute right-0 mt-2 w-48 bg-gray-800 border border-gray-700 rounded-xl shadow-lg overflow-hidden z-50">
+          <button (click)="logout(); showMenu.set(false)"
+            class="w-full text-left px-4 py-3 text-sm hover:bg-gray-700 text-red-400">
+            Se déconnecter
+          </button>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="flex gap-3">
+      <button routerLink="/auth" [queryParams]="{tab: 'register'}" class="px-4 py-2 border border-gray-500 rounded-full hover:bg-gray-700">S'inscrire</button>
+      <button routerLink="/auth" class="px-4 py-2 bg-blue-600 rounded-full hover:bg-blue-500">Se connecter</button>
+    </div>
+  }
+
+
+  
+
+</nav>

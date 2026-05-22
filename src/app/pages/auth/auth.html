@@ -1,0 +1,118 @@
+
+
+@if (activeTab() === 'login') {
+  <!-- Formulaire login : pseudo + password + bouton -->
+
+<div class="max-w-md w-full mx-auto mt-10">
+  <div class="p-6 rounded-lg bg-white border border-slate-300 shadow-xs dark:bg-neutral-800 dark:border-neutral-700">
+    <h1 class="text-slate-900 text-center text-2xl font-bold dark:text-slate-50">Se connecter</h1>
+
+
+  <div class=" text-white rounded-xl p-8 max-w-md mx-auto mt-10 shadow-lg">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-6">
+      <div>
+        <label for="pseudo" class="block text-sm/6 font-medium text-gray-100">Pseudo</label>
+        <div class="mt-2">
+          <input id="pseudo" type="text" formControlName="pseudo" name="pseudo" required  class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+            @if (loginPseudo?.invalid && loginPseudo?.touched) {
+               @if (loginPseudo?.errors?.['required']) {
+                  <p class="text-red-400 text-xs mt-1">Le pseudo est requis</p>
+               }
+            }
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="password" class="block text-sm/6 font-medium text-gray-100">Password</label>
+          <div class="text-sm">
+            <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+          </div>
+        </div>
+        <div class="mt-2">
+          <input id="password" type="password" formControlName="password" name="password" required class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+          @if (loginPassword?.invalid && loginPassword?.touched) {
+            @if (loginPassword?.errors?.['required']) {
+               <p class="text-red-400 text-xs mt-1">Le mot de passe est requis</p>
+            }
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="disabled:opacity-50 disabled:cursor-not-allowed flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        [disabled]="loginForm.invalid">
+        Sign in</button>
+      </div>
+    </form>
+
+    <p class="mt-10 text-center text-sm/6 text-gray-400">
+      Not a member?
+      <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Start a 14 day free trial</a>
+    </p>
+    </div>
+  </div>
+</div>
+
+}
+
+
+@if (activeTab() === 'register') {
+  <!-- Formulaire register : pseudo + email + password + bouton -->
+   <div class="max-w-md w-full mx-auto mt-10">
+      <div
+         class="p-6 rounded-lg bg-white border border-slate-300 shadow-xs md:p-6 dark:bg-neutral-800 dark:border-neutral-700">
+         <h1 class="text-slate-900 text-center text-2xl font-bold dark:text-slate-50">Créer un compte</h1>
+
+         <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="space-y-6 mt-10">
+            <div>
+               <label for="email" class="mb-2 text-slate-900 font-medium text-sm inline-block dark:text-slate-50">Email</label>
+               <input type="email" formControlName="email" id="email" name="email" placeholder="john@gmail.com" required
+                  class="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 dark:text-slate-50 dark:bg-neutral-700 dark:outline-neutral-600" />
+               @if (registerEmail?.invalid && registerEmail?.touched) {
+                  @if (registerEmail?.errors?.['required']) {
+                     <p class="text-red-400 text-xs mt-1">L'email est requis</p>
+                  }
+                  @if (registerEmail?.errors?.['email']) {
+                     <p class="text-red-400 text-xs mt-1">Format email invalide</p>
+                  }
+               }
+            </div>
+            <div>
+               <label for="pseudo" class="mb-2 text-slate-900 font-medium text-sm inline-block dark:text-slate-50">Pseudo</label>
+               <input type="text" formControlName="pseudo" id="pseudo" name="pseudo" placeholder="john" required
+                  class="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 dark:text-slate-50 dark:bg-neutral-700 dark:outline-neutral-600" />
+               @if (registerPseudo?.invalid && registerPseudo?.touched) {
+                  @if (registerPseudo?.errors?.['required']) {
+                     <p class="text-red-400 text-xs mt-1">Le pseudo est requis</p>
+                  }
+               }
+            </div>
+            <div>
+               <label for="password" class="mb-2 text-slate-900 font-medium text-sm inline-block dark:text-slate-50">Mot de passe</label>
+               <input type="password" formControlName="password" id="password" name="password" placeholder="••••••••" required
+                  class="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 dark:text-slate-50 dark:bg-neutral-700 dark:outline-neutral-600" />
+               @if (registerPassword?.invalid && registerPassword?.touched) {
+                  @if (registerPassword?.errors?.['required']) {
+                     <p class="text-red-400 text-xs mt-1">Le mot de passe est requis</p>
+                  }
+                  @if (registerPassword?.errors?.['minlength']) {
+                     <p class="text-red-400 text-xs mt-1">6 caractères minimum</p>
+                  }
+               }
+            </div>
+
+         
+
+            <button type="submit"
+            [disabled]="registerForm.invalid"
+               class="disabled:opacity-50 disabled:cursor-not-allowed w-full py-2 px-3.5 text-sm rounded-md font-semibold cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+               Créer mon compte</button>
+         </form>
+
+      </div>
+   </div>
+}
+
+

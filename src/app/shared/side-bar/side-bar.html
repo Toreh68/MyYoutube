@@ -1,0 +1,22 @@
+<aside class="w-64 h-full bg-gray-900 text-white flex flex-col p-4 gap-4">
+  
+  
+
+  <div>
+  <h3 class="text-sm text-gray-400 uppercase mb-2">Mes playlists</h3>
+  
+  @if (playlistService.isPlaylistEmpty()) {
+    <p class="text-sm text-gray-500">Aucune vidéo</p>
+  } @else {
+    @for (video of playlist(); track video.id) {
+      <div [routerLink]="['/video', video.id]" class="flex items-center gap-2 py-2 border-b border-gray-700 cursor-pointer hover:bg-gray-800 rounded-lg px-2 transition">
+        <img [src]="video.thumbnail" class="w-12 h-8 object-cover rounded" />
+        <p class="font-medium text-sm line-clamp-2" [innerHTML]="video.title"></p>
+        <button (click)="removeVideo(video.id)" class="text-gray-500 hover:text-red-400">✕</button>
+      </div>
+    }
+  }
+</div>
+
+
+</aside>
