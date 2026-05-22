@@ -1,59 +1,67 @@
 # MyYoutube
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+Clone YouTube développé avec Angular 21 dans le cadre d'un TP de formation.
 
-## Development server
-
-To start a local development server, run:
+## Lancer le projet
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Ouvrir ensuite `http://localhost:4200` dans le navigateur.
 
-## Code scaffolding
+## Clé API YouTube
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Le projet utilise l'API YouTube Data v3.
 
-```bash
-ng generate component component-name
+Créer le fichier `src/environments/environment.development.ts` (non versionné) :
+
+```ts
+export const environment = {
+  youtubeApiKey: 'TA_CLE_ICI'
+};
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+La clé s'obtient sur [Google Cloud Console](https://console.cloud.google.com) en activant l'API **YouTube Data API v3**.
 
-```bash
-ng generate --help
-```
+## Fonctionnalités
 
-## Building
+- Inscription / connexion avec persistance en localStorage
+- Recherche de vidéos via l'API YouTube
+- Ajout / suppression de vidéos dans une playlist personnelle
+- Lecture vidéo via iframe YouTube
+- Historique des recherches
+- Session persistante après rafraîchissement de la page
 
-To build the project run:
+## Architecture
 
-```bash
-ng build
-```
+### Composants
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+| Composant | Rôle |
+|---|---|
+| `NavBar` | Barre de navigation + menu profil |
+| `SideBar` | Playlist de l'utilisateur connecté |
+| `Auth` | Formulaires connexion / inscription |
+| `Search` | Recherche et affichage des résultats |
+| `Video` | Lecteur vidéo |
+| `Home` | Page d'accueil |
 
-## Running unit tests
+### Services
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+| Service | Rôle |
+|---|---|
+| `AuthService` | Gestion de la session utilisateur |
+| `PlaylistService` | CRUD playlist en localStorage |
+| `VideoService` | Appels API YouTube + état recherche |
 
-```bash
-ng test
-```
+### Concepts Angular 21 utilisés
 
-## Running end-to-end tests
+- Signals (`signal`, `computed`, `effect`)
+- Standalone components
+- Lazy loading des routes
+- `CanActivateFn` AuthGuard
+- ReactiveFormsModule avec validations
+- Syntaxe `@if` / `@for`
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
